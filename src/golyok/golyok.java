@@ -19,11 +19,39 @@ import javax.swing.JButton;
  */
 public class golyok extends javax.swing.JFrame {
     
-private String eltaroltErtek = null; // osztály szinten
-    String[] tarto1 = {"p","s","k","-"};
-    String[] tarto2 = {"s","p","k","-"};
-    String[] tarto3 = {"k","s","p","-"};
-    String[] tarto4 = {"-","-","-","-"};
+private void inicializalTartok() {
+    Random rand = new Random();
+    int uresIndex = rand.nextInt(4); 
+    String[][] tartok = new String[4][4];
+
+    for (int i = 0; i < 4; i++) {
+        if (i == uresIndex) {
+            tartok[i] = new String[]{"-", "-", "-", "-"};
+        } else {
+            String[] szinek = {"p", "k", "s"};
+            for (int j = 0; j < szinek.length; j++) {
+                int swapIndex = rand.nextInt(szinek.length);
+                String tmp = szinek[j];
+                szinek[j] = szinek[swapIndex];
+                szinek[swapIndex] = tmp;
+            }
+            tartok[i] = new String[]{"-", szinek[0], szinek[1], szinek[2]};
+
+        }
+    }
+
+    tarto1 = tartok[0];
+    tarto2 = tartok[1];
+    tarto3 = tartok[2];
+    tarto4 = tartok[3];
+}
+
+    
+private String eltaroltErtek = null; 
+    String[] tarto1;
+    String[] tarto2;
+    String[] tarto3;
+    String[] tarto4;
     
     ImageIcon p = new ImageIcon(getClass().getResource("/kepek/piros_50.jpg"));
     ImageIcon k = new ImageIcon(getClass().getResource("/kepek/kek_50.jpg"));
@@ -34,8 +62,31 @@ private String eltaroltErtek = null; // osztály szinten
      */
     public golyok() {
         initComponents();
-        gombokFeltoltese();
+        inicializalTartok();
+
+
+JButton[][] gombok = {
+    {jButton1, jButton2, jButton3, jButton4},     // a-f
+    {jButton5, jButton6, jButton7, jButton8},     
+    {jButton17, jButton18, jButton19, jButton20}, 
+    {jButton21, jButton22, jButton23, jButton24}  
+};
+
+
+
+    String[][] tartok = {tarto1, tarto2, tarto3, tarto4};
+
+for (int i = 0; i < gombok.length; i++) {
+    for (int j = 0; j < gombok[i].length; j++) {
+        final int oszlop = i;
+        final int index = j;
+        gombok[i][j].addActionListener(e ->
+            kezelGombot(gombok[oszlop][index], tartok[oszlop], index)
+        );
     }
+
+    gombokFeltoltese(); // ikonok és interaktivitás beállítása induláskor
+    }}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -54,148 +105,190 @@ private String eltaroltErtek = null; // osztály szinten
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
-        jButton14 = new javax.swing.JButton();
-        jButton15 = new javax.swing.JButton();
-        jButton16 = new javax.swing.JButton();
+        jButton17 = new javax.swing.JButton();
+        jButton18 = new javax.swing.JButton();
+        jButton19 = new javax.swing.JButton();
+        jButton20 = new javax.swing.JButton();
+        jButton21 = new javax.swing.JButton();
+        jButton22 = new javax.swing.JButton();
+        jButton23 = new javax.swing.JButton();
+        jButton24 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setMaximumSize(new java.awt.Dimension(80, 80));
         jButton1.setMinimumSize(new java.awt.Dimension(80, 80));
         jButton1.setPreferredSize(new java.awt.Dimension(80, 7));
+        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
+        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton2.setMaximumSize(new java.awt.Dimension(80, 80));
         jButton2.setMinimumSize(new java.awt.Dimension(80, 80));
         jButton2.setPreferredSize(new java.awt.Dimension(80, 7));
+        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
+        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton3.setMaximumSize(new java.awt.Dimension(80, 80));
         jButton3.setMinimumSize(new java.awt.Dimension(80, 80));
         jButton3.setPreferredSize(new java.awt.Dimension(80, 7));
+        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
+        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton4.setMaximumSize(new java.awt.Dimension(80, 80));
         jButton4.setMinimumSize(new java.awt.Dimension(80, 80));
         jButton4.setPreferredSize(new java.awt.Dimension(80, 7));
+        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
 
+        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton5.setMaximumSize(new java.awt.Dimension(80, 80));
         jButton5.setMinimumSize(new java.awt.Dimension(80, 80));
         jButton5.setPreferredSize(new java.awt.Dimension(80, 7));
+        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
 
+        jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton6.setMaximumSize(new java.awt.Dimension(80, 80));
         jButton6.setMinimumSize(new java.awt.Dimension(80, 80));
         jButton6.setPreferredSize(new java.awt.Dimension(80, 7));
+        jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
 
+        jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton7.setMaximumSize(new java.awt.Dimension(80, 80));
         jButton7.setMinimumSize(new java.awt.Dimension(80, 80));
         jButton7.setPreferredSize(new java.awt.Dimension(80, 7));
+        jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
             }
         });
 
+        jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton8.setMaximumSize(new java.awt.Dimension(80, 80));
         jButton8.setMinimumSize(new java.awt.Dimension(80, 80));
         jButton8.setPreferredSize(new java.awt.Dimension(80, 7));
+        jButton8.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
             }
         });
 
-        jButton9.setMaximumSize(new java.awt.Dimension(80, 80));
-        jButton9.setMinimumSize(new java.awt.Dimension(80, 80));
-        jButton9.setPreferredSize(new java.awt.Dimension(80, 7));
-
-        jButton10.setMaximumSize(new java.awt.Dimension(80, 80));
-        jButton10.setMinimumSize(new java.awt.Dimension(80, 80));
-        jButton10.setPreferredSize(new java.awt.Dimension(80, 7));
-
-        jButton11.setMaximumSize(new java.awt.Dimension(80, 80));
-        jButton11.setMinimumSize(new java.awt.Dimension(80, 80));
-        jButton11.setPreferredSize(new java.awt.Dimension(80, 7));
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        jButton17.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton17.setMaximumSize(new java.awt.Dimension(80, 80));
+        jButton17.setMinimumSize(new java.awt.Dimension(80, 80));
+        jButton17.setPreferredSize(new java.awt.Dimension(80, 7));
+        jButton17.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                jButton17ActionPerformed(evt);
             }
         });
 
-        jButton12.setMaximumSize(new java.awt.Dimension(80, 80));
-        jButton12.setMinimumSize(new java.awt.Dimension(80, 80));
-        jButton12.setPreferredSize(new java.awt.Dimension(80, 7));
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
+        jButton18.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton18.setMaximumSize(new java.awt.Dimension(80, 80));
+        jButton18.setMinimumSize(new java.awt.Dimension(80, 80));
+        jButton18.setPreferredSize(new java.awt.Dimension(80, 7));
+        jButton18.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
+                jButton18ActionPerformed(evt);
             }
         });
 
-        jButton13.setMaximumSize(new java.awt.Dimension(80, 80));
-        jButton13.setMinimumSize(new java.awt.Dimension(80, 80));
-        jButton13.setPreferredSize(new java.awt.Dimension(80, 7));
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
+        jButton19.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton19.setMaximumSize(new java.awt.Dimension(80, 80));
+        jButton19.setMinimumSize(new java.awt.Dimension(80, 80));
+        jButton19.setPreferredSize(new java.awt.Dimension(80, 7));
+        jButton19.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton19.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton13ActionPerformed(evt);
+                jButton19ActionPerformed(evt);
             }
         });
 
-        jButton14.setMaximumSize(new java.awt.Dimension(80, 80));
-        jButton14.setMinimumSize(new java.awt.Dimension(80, 80));
-        jButton14.setPreferredSize(new java.awt.Dimension(80, 7));
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
+        jButton20.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton20.setMaximumSize(new java.awt.Dimension(80, 80));
+        jButton20.setMinimumSize(new java.awt.Dimension(80, 80));
+        jButton20.setPreferredSize(new java.awt.Dimension(80, 7));
+        jButton20.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton20.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton14ActionPerformed(evt);
+                jButton20ActionPerformed(evt);
             }
         });
 
-        jButton15.setMaximumSize(new java.awt.Dimension(80, 80));
-        jButton15.setMinimumSize(new java.awt.Dimension(80, 80));
-        jButton15.setPreferredSize(new java.awt.Dimension(80, 7));
-        jButton15.addActionListener(new java.awt.event.ActionListener() {
+        jButton21.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton21.setMaximumSize(new java.awt.Dimension(80, 80));
+        jButton21.setMinimumSize(new java.awt.Dimension(80, 80));
+        jButton21.setPreferredSize(new java.awt.Dimension(80, 7));
+        jButton21.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton21.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton15ActionPerformed(evt);
+                jButton21ActionPerformed(evt);
             }
         });
 
-        jButton16.setMaximumSize(new java.awt.Dimension(80, 80));
-        jButton16.setMinimumSize(new java.awt.Dimension(80, 80));
-        jButton16.setPreferredSize(new java.awt.Dimension(80, 7));
-        jButton16.addActionListener(new java.awt.event.ActionListener() {
+        jButton22.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton22.setMaximumSize(new java.awt.Dimension(80, 80));
+        jButton22.setMinimumSize(new java.awt.Dimension(80, 80));
+        jButton22.setPreferredSize(new java.awt.Dimension(80, 7));
+        jButton22.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton22.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton16ActionPerformed(evt);
+                jButton22ActionPerformed(evt);
+            }
+        });
+
+        jButton23.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton23.setMaximumSize(new java.awt.Dimension(80, 80));
+        jButton23.setMinimumSize(new java.awt.Dimension(80, 80));
+        jButton23.setPreferredSize(new java.awt.Dimension(80, 7));
+        jButton23.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton23.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton23ActionPerformed(evt);
+            }
+        });
+
+        jButton24.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton24.setMaximumSize(new java.awt.Dimension(80, 80));
+        jButton24.setMinimumSize(new java.awt.Dimension(80, 80));
+        jButton24.setPreferredSize(new java.awt.Dimension(80, 7));
+        jButton24.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton24.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton24ActionPerformed(evt);
             }
         });
 
@@ -216,19 +309,19 @@ private String eltaroltErtek = null; // osztály szinten
                     .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,21 +329,21 @@ private String eltaroltErtek = null; // osztály szinten
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25)
-                        .addComponent(jButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25)
-                        .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25)
-                        .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton24, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25)
-                        .addComponent(jButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25)
-                        .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25)
-                        .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25)
@@ -267,95 +360,77 @@ private String eltaroltErtek = null; // osztály szinten
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-            int index = 2; // tarto1
-    kezelGombot(jButton2, tarto1, index);
+
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-            int index = 2; // tarto2
-    kezelGombot(jButton6, tarto2, index);
+
         
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    int index = 3; // tarto1
-    kezelGombot(jButton1, tarto1, index);
+
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-        // TODO add your handling code here:
-    int index = 0; // tarto4
-    kezelGombot(jButton14, tarto4, index);
-    }//GEN-LAST:event_jButton14ActionPerformed
-
-    private void jButton16ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton16ActionPerformed
-        // TODO add your handling code here:
-            int index = 2; // tarto4
-    kezelGombot(jButton16, tarto4, index);
-    }//GEN-LAST:event_jButton16ActionPerformed
-
-    private void jButton15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton15ActionPerformed
-        // TODO add your handling code here:
-            int index = 1; // tarto4
-    kezelGombot(jButton15, tarto4, index);
-    }//GEN-LAST:event_jButton15ActionPerformed
-
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-        // TODO add your handling code here:
-            int index = 3; // tarto4
-    kezelGombot(jButton13, tarto4, index);
-    }//GEN-LAST:event_jButton13ActionPerformed
-
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        // TODO add your handling code here:
-            int index = 0; // tarto3
-    kezelGombot(jButton11, tarto3, index);
-    }//GEN-LAST:event_jButton11ActionPerformed
-
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-        // TODO add your handling code here:
-            int index = 3; // tarto3
-    kezelGombot(jButton12, tarto3, index);
-    }//GEN-LAST:event_jButton12ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-            int index = 3; // tarto2
-    kezelGombot(jButton5, tarto2, index);
+
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-            int index = 1; // tarto1
-    kezelGombot(jButton3, tarto1, index);
+
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-            int index = 0; // tarto1
-    kezelGombot(jButton4, tarto1, index);
+
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-            int index = 1; // tarto2
-    kezelGombot(jButton7, tarto2, index);
+
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-            int index = 0; // tarto2
-    kezelGombot(jButton8, tarto2, index);
+
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton18ActionPerformed
+
+    private void jButton19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton19ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton19ActionPerformed
+
+    private void jButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton20ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton20ActionPerformed
+
+    private void jButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton21ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton21ActionPerformed
+
+    private void jButton22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton22ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton22ActionPerformed
+
+    private void jButton23ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton23ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton23ActionPerformed
+
+    private void jButton24ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton24ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton24ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -393,62 +468,136 @@ private String eltaroltErtek = null; // osztály szinten
             }
         });
     }
-public void gombokFeltoltese() {
+
     
-    // Tarto és gombok tömbök
-    JButton[][] gombok = {
-        {jButton4, jButton3, jButton2, jButton1},   // tarto1
-        {jButton8, jButton7, jButton6, jButton5},   // tarto2
-        {jButton11, jButton10, jButton9, jButton12},// tarto3
-        {jButton14, jButton15, jButton16, jButton13} // tarto4
-    };
-    
+    private void winCheck() {
     String[][] tartok = {tarto1, tarto2, tarto3, tarto4};
-    
+    int szinesOszlopok = 0;
+
+    for (String[] tarto : tartok) {
+        // csak akkor vizsgáljuk, ha van legalább 3 nem üres elem
+        int nemUresDarab = 0;
+        for (String s : tarto) {
+            if (!s.equals("-")) nemUresDarab++;
+        }
+        if (nemUresDarab < 3) continue;
+
+        // megnézzük, hogy az alsó 3 érték azonos-e
+        String szin = tarto[1];
+        if (szin.equals(tarto[2]) && szin.equals(tarto[3]) && !szin.equals("-")) {
+            szinesOszlopok++;
+        }
+    }
+
+    if (szinesOszlopok == 3) {
+        int valasz = javax.swing.JOptionPane.showConfirmDialog(
+            this,
+            "Gratulálok, nyertél!\nSzeretnél új játékot kezdeni?",
+            "Győzelem",
+            javax.swing.JOptionPane.YES_NO_OPTION
+        );
+
+        if (valasz == javax.swing.JOptionPane.YES_OPTION) {
+            inicializalTartok();
+            gombokFeltoltese();
+        }
+    }
+}
+
+private int getTopIndex(String[] tarto) {
+    for (int i = 0; i < tarto.length; i++) {
+        if (!tarto[i].equals("-")) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+private int getInsertIndex(String[] tarto) {
+    for (int i = tarto.length - 1; i >= 0; i--) {
+        if (tarto[i].equals("-")) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+
+
+private void gombokFeltoltese() {
+JButton[][] gombok = {
+    {jButton1, jButton2, jButton3, jButton4},
+    {jButton5, jButton6, jButton7, jButton8},
+    {jButton17, jButton18, jButton19, jButton20},
+    {jButton21, jButton22, jButton23, jButton24}
+};
+    String[][] tartok = {tarto1, tarto2, tarto3, tarto4};
+
     for (int i = 0; i < tartok.length; i++) {
+        int topIndex = getTopIndex(tartok[i]);
+        int insertIndex = getInsertIndex(tartok[i]);
+
         for (int j = 0; j < tartok[i].length; j++) {
-            switch (tartok[i][j]) {
-                case "p" -> gombok[i][j].setIcon(p);
-                case "k" -> gombok[i][j].setIcon(k);
-                case "s" -> gombok[i][j].setIcon(s);
-                default -> gombok[i][j].setIcon(null);
+            JButton gomb = gombok[i][j];
+            String ertek = tartok[i][j];
+
+            switch (ertek) {
+                case "p" -> gomb.setIcon(p);
+                case "k" -> gomb.setIcon(k);
+                case "s" -> gomb.setIcon(s);
+                default -> gomb.setIcon(null);
+            }
+
+            if (eltaroltErtek == null) {
+                gomb.setEnabled(j == topIndex);
+            } else {
+                gomb.setEnabled(j == insertIndex);
             }
         }
     }
 }
-private void kezelGombot(JButton gomb, String[] tarto, int index) {
-    String aktualisErtek = tarto[index];
 
-    if ("p".equals(aktualisErtek) && (gomb.getIcon() == k || gomb.getIcon() == s)) {
-        eltaroltErtek = aktualisErtek; // eltároljuk
-        gomb.setIcon(null);             // ikon eltávolítása
-        tarto[index] = "-";             // tartó frissítése
-    } else if (eltaroltErtek != null && "-".equals(aktualisErtek)) {
-        tarto[index] = eltaroltErtek;
-        switch (eltaroltErtek) {
-            case "p" -> gomb.setIcon(p);
-            case "k" -> gomb.setIcon(k);
-            case "s" -> gomb.setIcon(s);
-        }
-        eltaroltErtek = null;
+
+private void kezelGombot(JButton gomb, String[] tarto, int index) {
+    int topIndex = getTopIndex(tarto);
+
+    if (eltaroltErtek == null && index == topIndex && topIndex != -1) {
+        eltaroltErtek = tarto[topIndex];
+        tarto[topIndex] = "-";
+        gomb.setIcon(null);
     }
+
+    else if (eltaroltErtek != null) {
+        int insertIndex = getInsertIndex(tarto);
+        if (index == insertIndex && insertIndex != -1) {
+            tarto[insertIndex] = eltaroltErtek;
+            switch (eltaroltErtek) {
+                case "p" -> gomb.setIcon(p);
+                case "k" -> gomb.setIcon(k);
+                case "s" -> gomb.setIcon(s);
+            }
+            eltaroltErtek = null;
+        }
+    }
+    gombokFeltoltese();
+    winCheck();
 }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton15;
-    private javax.swing.JButton jButton16;
+    private javax.swing.JButton jButton17;
+    private javax.swing.JButton jButton18;
+    private javax.swing.JButton jButton19;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton20;
+    private javax.swing.JButton jButton21;
+    private javax.swing.JButton jButton22;
+    private javax.swing.JButton jButton23;
+    private javax.swing.JButton jButton24;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
     // End of variables declaration//GEN-END:variables
 }
